@@ -1,2 +1,2 @@
 #!/bin/bash
-alias "rot13"
+alias rot13 > .txt
