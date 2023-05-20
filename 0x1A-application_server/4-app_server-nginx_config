@@ -1,0 +1,23 @@
+server {
+        listen 80;
+	listen [::]:80;
+
+	server_name 54.87.179.137
+
+	add_header X-Served-By "125851-web-01";
+	root /var/www/html;
+	index index.html index.htm;
+	location = /airbnb-onepage/ {
+		alias ~/Airbnb_clone_v2/;
+		index index.html index.htm;
+		proxy_pass http://0.0.0.0:5000/airbnb-onepage/;
+	}
+	# Server /number_odd_or_even/ route on AirBnB_clone_v2
+	location ~ ^/airbnb-dynamic/number_odd_or_even/(\d+)$ {
+		proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+	}
+	
+	# Server API on Repository pulled form team assignment AirBnB_clone_v3
+	location /api/ {
+	proxy_pass http://0.0.0.0:5002/api;
+	}
